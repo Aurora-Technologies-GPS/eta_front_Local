@@ -8,7 +8,7 @@
 
   <NavHeader />
     <div class="container mt-5">
-    <form @submit.prevent="enviar" >
+    <div >
 
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -18,7 +18,7 @@
     </div>
     <div class="form-group col-md-6">
       <strong><label for="inputDestino">Description</label></strong>
-        <input v-model="adding.description" type="text" class="form-control" id="inputName" >
+        <input type="text" class="form-control" id="inputName" >
     </div>
   </div>
         <div class="form-row">
@@ -44,22 +44,23 @@
     </div>
     <div class="form-group col-md-3">
       <strong><label for="departureDue">Tiempo de salida</label></strong>
-
-        <input  v-model="adding.departureDue" class="form-control datepicker" name="from" placeholder="Selected starting date" type="datetime-local"  />
+ 
+        <input v-model="adding.departureDue" class="form-control datepicker" name="from" placeholder="Selected starting date" type="datetime-local"  />
   
     </div>
     <div class="form-group col-md-3">
       <strong><label for="arrivalDue">Tiempo de LLegada</label></strong>
 
-        <input v-model="adding.arrivalDue" class="form-control datepicker" name="from" placeholder="Selected starting date" type="datetime-local"  />
+        <input  v-model="adding.arrivalDue" class="form-control datepicker" name="from" placeholder="Selected starting date" type="datetime-local"  />
   
     </div>
   </div>
 
   <div class="text-center mb-5">
-  <button type="submit" class="btn btn-primary">Guardar</button>
+  <button  @click="enviar()" class="btn btn-primary">Guardar</button>
   </div>
-</form>
+
+</div>
     </div>
 </div>
 
@@ -68,7 +69,7 @@
 
   import { ref } from 'vue';
   import NavHeader from './NavHeader.vue';
-  import { placeList, saveShuttle } from './DataConector.js' //
+  import { placeList, saveShuttle } from './DataConector.js' // 
 
 
 let datos=ref({ 
@@ -81,12 +82,14 @@ let saved=ref({
 })
 
 let data=ref({
+  hash:null,
   clientId:0,
   userId:0
 })
 
 if (window.$cookies.isKey('authorized')){
 
+  data.value.hash=window.$cookies.get('authorized').user.hash
 
   data.value.clientId= window.$cookies.get('authorized').user.clientId
 
@@ -126,70 +129,26 @@ if (window.$cookies.isKey('authorized')){
 
 let adding=ref({
 
+  hash: data.value.hash,
   name:null,
   clientId:data.value.clientId,
-  userId:data.value.userId,
-  departureDue:"2023-06-12T19:30",
-  arrivalDue:"2023-06-12T19:30",
+  userId:data.value.clientId,
+  departureDue:"2024-06-12T19:30",
+  arrivalDue:"2024-06-12T19:30",
   startPlaceId:null,
-  endPlaceId:null,
-  description:null
+  endPlaceId:null
 
 })
 
 
-
-/*function cleanAdding(){
-  adding.value={
-  name:null,
-  start:null,
-  end:null,
-  description:null
-}
-
-}*/
-
 function enviar(){
 
-      console.log(adding.value)
+  console.log(adding.value)
 
- saveShuttle(adding.value).then(resul_saving=>{
-
-    if (resul_saving) {
-      console.log(adding.value)
-      console.log(resul_saving)
-
-    }else{
-      console.log("No se pudo Guardar el Shuttle ")
-    }
-
+  saveShuttle(adding.value).then(result=>{
+    console.log(result)
   })
 
-  /*add_trayecto(adding.value).then(result=>{
-
-  //cleanAdding()
-
-    if(result){
-
-    saved.value.succed=result
-    saved.value.message="Guardado Correctamente"
-
-    setTimeout(()=>{
-      window.location.replace("./");
-    },2000)
-
-    }else{
-      saved.value.succed=true
-      saved.value.message="No se Guardaron los Datos"
-
-    setTimeout(()=>{
-      saved.value.succed=false
-    },3000)
-
-    }      
-
-  })
-  */
 }
 
 

@@ -36,7 +36,7 @@
 
 <script setup>
 	import {ref} from 'vue'
-	import { auth } from './DataConector.js' //auth placeList
+	import { auth, } from './DataConector.js' //auth placeList auth ,
 
 
 let datosUser=ref({username:"", password:""})
