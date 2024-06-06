@@ -8,7 +8,7 @@
 
   <NavHeader />
     <div class="container mt-5">
-    <div >
+   <form @submit.prevent="enviar" >
 
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -57,10 +57,10 @@
   </div>
 
   <div class="text-center mb-5">
-  <button  @click="enviar()" class="btn btn-primary">Guardar</button>
+  <button type="submit" class="btn btn-primary">Guardar</button>
   </div>
 
-</div>
+</form>
     </div>
 </div>
 
@@ -69,7 +69,7 @@
 
   import { ref } from 'vue';
   import NavHeader from './NavHeader.vue';
-  import { placeList, saveShuttle } from './DataConector.js' // 
+  import { placeList, getSaveShuttle  } from './DataConector.js' // saveShuttle
 
 
 let datos=ref({ 
@@ -145,7 +145,7 @@ function enviar(){
 
   console.log(adding.value)
 
-  saveShuttle(adding.value).then(result=>{
+  getSaveShuttle(adding.value).then(result=>{
     console.log(result)
   })
 
