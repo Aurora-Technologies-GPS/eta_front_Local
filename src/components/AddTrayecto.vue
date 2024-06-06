@@ -69,7 +69,7 @@
 
   import { ref } from 'vue';
   import NavHeader from './NavHeader.vue';
-  import { placeList, getSaveShuttle  } from './DataConector.js' // saveShuttle
+  import { placeList, saveShuttle ,   } from './DataConector.js' // saveShuttle getSaveShuttle
 
 
 let datos=ref({ 
@@ -145,7 +145,7 @@ function enviar(){
 
   console.log(adding.value)
 
-  getSaveShuttle(adding.value).then(result=>{
+  saveShuttle(adding.value).then(result=>{
     console.log(result)
   })
 

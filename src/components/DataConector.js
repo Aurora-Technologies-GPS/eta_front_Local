@@ -67,22 +67,8 @@ export async function saveShuttle(params) {
     return data
 }
 
-export async function getSaveShuttle(params) {
+/*export async function getSaveShuttle(params) {
     let data = []
-
-/*    console.log(paramst)*/
-
-/*   const params= {
-    hash: "d2b4a3a8f6ff0d0ed0919ad7501cda32",
-    clientId: 300310,
-    arrivalDue: "2024-06-03T22:44:57-04:00",
-    userId: 300310,
-    startPlaceId: 2117241,
-    endPlaceId: 2117261,
-    departureDue: "2024-06-03T22:44:57-04:00",
-    name: "JEJE"
-
-}*/
 
 const tempDates={
     departureDue:'2024-06-03T22:44:57-04:00',
@@ -95,4 +81,4 @@ const tempDates={
         console.log(error)
     });
     return data
-}
+}*/

@@ -90,18 +90,18 @@ findShuttle(window.$cookies.get('authorized').user.hash).then(result=>{
 }
 
 function get_places_Label(place_id){
-  try{
+ try{
     return places_List.value.get(place_id).name
   }catch{
     return "N/A"
-  } 
+  }
 
- // return place_id
+  //return place_id
 }
 
 function getTimeAndDate(isoDate){
 
-  try{
+ try{
     let dateOut=new Date(isoDate)
 
     return dateOut.toLocaleString()
@@ -110,7 +110,7 @@ function getTimeAndDate(isoDate){
     return "N/A"
   } 
 
-  // return isoDate
+   //return isoDate
 }
 
 
