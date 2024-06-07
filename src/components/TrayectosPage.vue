@@ -1,13 +1,32 @@
 <template>
-  <div class="container targetasContainer">
+  <div class="targetasContainer">
 
-    <div class="card" v-for=" (dato, index) in dataOut" :key="index">
-      <div>
+    <h2 v-if="dataOut.length<1">Listado Vacio</h2>
+
+       <div class="card" v-for=" (dato, index) in dataOut" :key="index">
+
+      <div class="text-right">
+
+        <button  style="border: none; background: transparent;" data-toggle="dropdown" >
+          <i class="bi bi-sliders"></i>
+        </button>
+
+        <div class="text-center dropdown-menu text-right" >
+          <a class="dropdown-item" href="#">Action</a>
+          <div class="dropdown-divider"></div>
+          <a @click="deleteTemplate(dato.id)" class="dropdown-item" href="#">Ocultar Trayecto</a>
+        </div>
+        
+      </div>
+
+
+
+      <div class="d-none">
       <span><b>id: </b></span>
       <span>{{ dato.id}}</span>
       </div>
 
-      <div>
+      <div class="d-none">
       <span><b>clientId: </b></span>
       <span>{{ dato.clientId}}</span>
       </div>
@@ -18,22 +37,22 @@
       </div>
 
       <div>
-      <span><b>startPlaceId: </b></span>
+      <span><b>Origen: </b></span>
       <span>{{ get_places_Label(dato.startPlaceId)}}</span>
       </div>
 
       <div>
-      <span><b>endPlaceId: </b></span>
+      <span><b>Destino: </b></span>
       <span>{{ get_places_Label(dato.endPlaceId)}}</span>
       </div>
 
       <div>
-      <span><b>departureDue: </b></span>
+      <span><b>Salida: </b></span>
       <span>{{ getTimeAndDate(dato.departureDue)}}</span>
       </div>
 
       <div>
-      <span><b>arrivalDue: </b></span>
+      <span><b>Llegada: </b></span>
       <span>{{ getTimeAndDate(dato.arrivalDue)}}</span>
       </div>
 
@@ -49,14 +68,14 @@
 <script setup>
 import { ref } from 'vue';
 
-import { findShuttle, placeList } from './DataConector.js'; 
+import { findShuttle, placeList, deleteShuttle } from './DataConector.js'; 
 
 const places_List =ref( new Map())
 
 let dataOut= ref([])
 
-
-if (window.$cookies.isKey('authorized')){
+function updater(){
+  if (window.$cookies.isKey('authorized')){
 
 findShuttle(window.$cookies.get('authorized').user.hash).then(result=>{
   
@@ -88,6 +107,10 @@ findShuttle(window.$cookies.get('authorized').user.hash).then(result=>{
 }else{
   console.log("No authorized")
 }
+}
+
+updater();
+
 
 function get_places_Label(place_id){
  try{
@@ -114,6 +137,18 @@ function getTimeAndDate(isoDate){
 }
 
 
+function deleteTemplate(id){
+
+  if (window.$cookies.isKey('authorized')){
+    deleteShuttle(window.$cookies.get('authorized').user.hash, id).then(response_del=>{
+      console.log(response_del)
+      updater()
+    })
+  }else{
+    console.log("No esta logueado")
+  }
+}
+
 
 
 </script>
@@ -121,15 +156,17 @@ function getTimeAndDate(isoDate){
 <style scoped>
 
 .targetasContainer{
-  display: flex;
-  flex-wrap: wrap;
+ display: flex;
+ flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-around;
+/* justify-content: space-around;*/
 }
 
 .card {
-  padding: 20px;
-  margin-top: 10px;
+ padding: 10px;
+ margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
   background-color: #f8f9fa;
   cursor: pointer;
 }

@@ -33,8 +33,8 @@
     </form>
     <div style="padding-right: 5px"><strong>{{email}}</strong></div>
 
-    <form  class="form-inline my-2 my-lg-0" style="padding-right: 5px;">
-        <button @click="salir()" class="btn btn-primary" data-mdb-ripple-init>logOUT</button>
+    <form @submit.prevent="salir" class="form-inline my-2 my-lg-0" style="padding-right: 5px;">
+        <button type="submit" class="btn btn-primary" data-mdb-ripple-init>logOUT</button>
     </form>
 
   </div>
@@ -57,21 +57,20 @@ if (window.$cookies.isKey('authorized')){
    window.location.replace("./");
 }
 
-  function salir(){
-     window.$cookies.remove('authorized')
+function salir(){
 
-    logout(window.$cookies.get('authorized').user.hash).then(res_logout=>
-    {
-      if (res_logout) {
-        
-        console.log(res_logout)
+  logout(window.$cookies.get('authorized').user.hash).then(res_logout=>{
 
-      }else{
-        console.log("No se Pudo hacer Logout")
-      }
-    })
+    if (res_logout) {
+      console.log(res_logout)  
+      window.$cookies.remove('authorized') 
+      window.location.replace("./");
 
-  }
+    }else{
+      console.log("No se Pudo hacer Logout")
+    }
+  })
+}
 
 
 

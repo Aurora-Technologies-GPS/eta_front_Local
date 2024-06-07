@@ -143,10 +143,27 @@ let adding=ref({
 
 function enviar(){
 
-  console.log(adding.value)
-
   saveShuttle(adding.value).then(result=>{
     console.log(result)
+
+        if(result){
+
+    saved.value.succed=result
+    saved.value.message="Guardado Correctamente"
+
+    setTimeout(()=>{
+     window.location.replace("./");
+    },2000)
+
+    }else{
+      saved.value.succed=true
+      saved.value.message="No se Guardaron los Datos"
+
+    setTimeout(()=>{
+      saved.value.succed=false
+    },3000)
+
+    }
   })
 
 }

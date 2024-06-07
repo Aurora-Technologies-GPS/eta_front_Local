@@ -8,25 +8,25 @@
   <img  src='../assets/auroraLogo.png' alt="Responsive image" style=" width: 50%;">
 <h3 class="Bienvenido">Bienvenido!</h3>
 
-
+<form @submit.prevent="consultar" >
 <div  class="searchBar   mt-2 rounded-pill" style="position: relative;">
 <i class="bi bi-person-fill"></i>
-<input v-model="datosUser.username" class="inputsearchBar"  placeholder="Usuario" type="text">
+<input v-model="datosUser.username" class="inputsearchBar"  placeholder="Usuario" type="text" required autofocus>
 <i v-if="claveIncorrecta" class="bi bi-exclamation-circle" style="position: absolute; right: 5%; margin: 5px; font-size: larger; color: red;"></i> 
 </div>
-
-
-
 
 <br>	
 <div  class="searchBar rounded-pill" style="position: relative;">
 <i class="bi bi-key-fill"></i>
-<input class="inputsearchBar" v-model="datosUser.password"  placeholder="Contrasena" type="password">
+<input class="inputsearchBar" v-model="datosUser.password"  placeholder="Contrasena" type="password"  required>
 <i v-if="claveIncorrecta" class="bi bi-exclamation-circle" style="position: absolute; right: 5%; margin: 5px; font-size: larger; color: red;"></i> 
-</div>	
-	
-<div @click="consultar()" class="btn btn-primary rounded-pill btAcceder" href="#" role="button"><b>Ingresar</b>
 </div>
+
+<button type="submit" class="btn btn-primary rounded-pill btAcceder" href="#" role="button"><b>Ingresar</b>
+</button>
+
+</form>
+
 
 </div>
 
@@ -60,6 +60,8 @@ function consultar(){
 
 auth(datosUser.value).then(result=>{
 
+  console.log(result)
+
   if (result.Error) {
     console.log("Clave Incorrecta")
     claveIncorrecta.value=true
@@ -69,10 +71,10 @@ auth(datosUser.value).then(result=>{
     if (result) {
       console.log("Bienvenido")
       window.$cookies.set('authorized',result)
-      //window.$cookies.get('authorized')
+      window.$cookies.get('authorized')
 
       setTimeout(()=>{
-      window.location.replace("./dashboard");
+     window.location.replace("./dashboard");
       },100)
 
     }else{

@@ -53,32 +53,26 @@ export async function findShuttle(hash) {
     return data
 }
 
-export async function saveShuttle(params) {
+export async function deleteShuttle(hash, id) {
     let data = []
+    const ids=`?ids=${id}`
 
-    await axios.post(api+'/v1/shuttle/create',params).then(response => {
-            console.log("Success ========>", response);
-            data=response
-        })
-        .catch(error => {
-            console.log("Error ========>", error);
-        }
-    )
-    return data
-}
-
-/*export async function getSaveShuttle(params) {
-    let data = []
-
-const tempDates={
-    departureDue:'2024-06-03T22:44:57-04:00',
-    arrivalDue :'2024-06-03T22:44:57-04:00'
-}
-    await axios.get(api+`/v1/shuttle/create/${params.hash}/${params.name}/${params.startPlaceId}/${params.endPlaceId}/${tempDates.departureDue}/${tempDates.arrivalDue}`).then(response => {
-
+    await axios.delete(api+`/v1/shuttle/delete/${hash}${ids}`).then(response => {
         data = response.data
     }).catch(error => {
         console.log(error)
     });
     return data
-}*/
+}
+
+export async function saveShuttle(params) {
+
+    let data
+
+    await axios.post(api+'/v1/shuttle/create',params).then(response => {
+        data = response.data
+    }).catch(error => {
+        console.log(error)
+    });
+    return data
+}
