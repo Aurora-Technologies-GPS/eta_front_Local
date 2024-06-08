@@ -67,7 +67,7 @@ export async function deleteShuttle(hash, id) {
 
 export async function saveShuttle(params) {
 
-    let data
+    let data = []
 
     await axios.post(api+'/v1/shuttle/create',params).then(response => {
         data = response.data
@@ -76,3 +76,18 @@ export async function saveShuttle(params) {
     });
     return data
 }
+
+export async function saveShuttleService(params) {
+
+    let data
+    console.log(params)
+
+    await axios.post(api+'/v1/shuttle_service/create',params).then(response => {
+
+        data = response.data
+    }).catch(error => {
+        console.log(error)
+    });
+    return data
+}
+

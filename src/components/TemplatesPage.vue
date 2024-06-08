@@ -1,4 +1,18 @@
 <template>
+
+  <div>
+<div style="display: flex;">
+<h3> Asignar Nuevo Template</h3>
+
+<router-link to="/add">
+    <button style="border-radius: 50%; margin-left: 5px;" type="button" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+
+</router-link>
+
+
+</div>
   <div class="targetasContainer">
 
     <h2 v-if="dataOut.length<1">Listado Vacio</h2>
@@ -62,6 +76,7 @@
 
       
     </div>
+  </div>
   </div>
 </template>
 
