@@ -15,7 +15,11 @@
         <i   class="bi bi-ui-checks-grid"></i> <span>Home</span> 
       </li>
 
-              <li style="cursor: pointer;" class="menuTitles">
+      <li  @click="vew_add_trayecto()" style="cursor: pointer;" class="menuTitles">
+        <i   class="bi bi-hourglass-split"></i> <span>Shutters</span> 
+      </li>
+
+<!--       <li style="cursor: pointer;" class="menuTitles">
        
           <div data-toggle="collapse" class="mlMenu"  href="#multiCollapseExample1"  aria-expanded="false" aria-controls="multiCollapseExample1" > <i class="bi bi-hourglass-split"></i> Shutters <i class="bi bi-chevron-down"></i></div>
        
@@ -24,19 +28,22 @@
           </div>
 
     
+      </li> -->
+
+            <li  @click="vew_add_template()" style="cursor: pointer;" class="menuTitles">
+        <i class="bi bi-back"></i> <span>Templates</span> 
       </li>
 
-        <li style="cursor: pointer;" class="menuTitles">
+<!--         <li style="cursor: pointer;" class="menuTitles">
        
           <div data-toggle="collapse" class="mlMenu"  href="#Asignar"  aria-expanded="false" aria-controls="Asignar" > <i class="bi bi-back"></i> Templates <i class="bi bi-chevron-down"></i></div>
        
           <div class="collapse multi-collapse" id="Asignar">
-            <!--  <div  style="cursor: pointer;" >Templates</div> -->
+      
              <div @click="vew_add_template()" style="cursor: pointer;" >Asignar</div>
           </div>
-
     
-      </li>
+      </li> -->
 
 
         <li class="menuTitles">

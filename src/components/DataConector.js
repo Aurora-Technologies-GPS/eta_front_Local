@@ -53,6 +53,16 @@ export async function findShuttle(hash) {
     return data
 }
 
+export async function find_Service_Shuttle(hash) {
+    let data = []
+    await axios.get(api+'/v1/shuttle_service/list/' + hash).then(response => {
+        data = response.data
+    }).catch(error => {
+        console.log(error)
+    });
+    return data
+}
+
 export async function deleteShuttle(hash, id) {
     let data = []
     const ids=`?ids=${id}`

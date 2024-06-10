@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div class="contenedorTabla">
 
-<!-- v-for=" (dato, index) in dataOut" :key="index" -->
-
-      <div >
+      <div  v-for=" (dato, index) in serviceShutters_Out" :key="index" >
 
 
         <div class="card">
@@ -103,11 +101,41 @@
 
 <script setup>
 
+  import { ref } from 'vue';
+
+  import { find_Service_Shuttle,    } from './DataConector.js' 
+
+  let serviceShutters_Out= ref([])
+
+
+if (window.$cookies.isKey('authorized')){
+
+  find_Service_Shuttle(window.$cookies.get('authorized').user.hash).then(listShutter=>{
+     serviceShutters_Out.value=listShutter
+    console.log(listShutter)
+
+})
+
+}else{
+  console.log("Logeate Please")
+}
+
+
 
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+
+ .contenedorTabla {
+height: 85vh;
+margin-left: auto;
+margin-right: auto;
+padding-top:0px;
+width: 95%;
+overflow: auto
+}
+
 
 .btn-circle.btn-xl {
   width: auto;
